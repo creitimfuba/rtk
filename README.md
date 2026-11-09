@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="https://avatars.githubusercontent.com/u/258253854?v=4" alt="RTK - Rust Token Killer" width="500">
+  <img src=".github/assets/rtk-banner.png" alt="RTK — Rust Token Killer. Fewer tokens, more possibilities.">
 </p>
-
-<h3 align="center">Fewer tokens, more possibilities.</h3>
 
 <p align="center">
   <strong>The cost reduction engine for AI coding agents.</strong>
