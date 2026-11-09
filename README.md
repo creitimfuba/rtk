@@ -68,26 +68,20 @@ Restart your agent. That's it: when it runs `git status`, RTK runs `rtk git stat
 
 The part 85k developers starred. Built by 200+ contributors, written against real command output, and every filter has to cut at least 20% to ship.
 
-| Operation | What RTK does to the output |
-|-----------|-----------------------------|
-| `ls` / `tree` | Tree format with file counts instead of one line per entry |
-| `cat` / `read` | Smart file reading: signatures and structure over full bodies |
-| `grep` / `rg` | Truncates long lines, groups matches by file |
-| `ast-grep` | Groups structural matches by file, caps overflow |
-| `git status` | Compact stat format, grouped by state |
-| `git diff` | Reduced context, headers stripped |
-| `git log` | Hash, author and subject only |
-| `git add/commit/push` | Confirmation line instead of full progress output |
-| `cargo test` / `npm test` | Failures only, passing tests collapsed to a count |
-| `ruff check` | Grouped by rule and file |
-| `sqlfluff lint` | Grouped by rule and file |
-| `pytest` | Failures only, traceback trimmed |
-| `go test` | NDJSON parsed, failures only |
-| `docker ps` | Essential fields only |
+<p align="center">
+  <img src=".github/assets/before-after.png" alt="cargo test: 65 lines of raw output on the left; on the right, the 5 lines the agent reads with rtk: the failing test, its assertion, its location, and the pass/fail count">
+</p>
+
+| Operation | What the agent reads |
+|-----------|----------------------|
+| `cargo test` / `npm test` / `pytest` / `go test` | Failures only, with their assertion; passing tests collapsed to a count |
+| `git status` / `git diff` / `git log` | Compact status, reduced diff context, one line per commit |
+| `git add/commit/push` | A confirmation line instead of progress output |
+| `ls` / `tree` / `grep` / `rg` | Trees with counts, matches grouped by file, long lines cut |
+| `ruff check` / `eslint` / `cargo clippy` | Grouped by rule and file |
+| `docker ps` / `kubectl` | Essential fields only |
 
 100+ commands across Git, GitHub CLI, Cargo/Rust, JavaScript (npm, pnpm, vitest, jest, tsc, Next.js, Angular, Playwright, Prisma), Python (ruff, pytest, mypy, pip), Go (go test, golangci-lint), Ruby, .NET, JVM (Gradle, Maven), PHP, Docker, Kubernetes, AWS, Terraform, and the file/search builtins. Every command and its filter: **[What RTK Optimizes](https://www.rtk-ai.app/docs/resources/what-rtk-covers/)**
-
-Four strategies, picked per command: **filtering** removes noise (progress bars, boilerplate, blank lines), **grouping** aggregates similar items (files by directory, errors by type), **truncation** keeps the relevant context, **deduplication** collapses repeated lines with a count.
 
 Three promises:
 
@@ -102,19 +96,15 @@ rtk bypass npm install express          # raw npm output
 
 The hook rewrites shell commands. Built-in tools such as `Read`, `Grep` and `Glob` pass through untouched on the default pipeline; in Claude Code, `rtk:posthook` compresses them too (see below).
 
-> **Does RTK break the prompt cache?** No. RTK filters output once per command. The result is stored in history and cached normally on later API calls, and smaller outputs mean cheaper cache writes and reads. See [Troubleshooting](docs/guide/resources/troubleshooting.md#does-rtk-break-claudes-prompt-cache).
+> **Does RTK break the prompt cache?** No: output is filtered once, before it enters the conversation. [Details](docs/guide/resources/troubleshooting.md#does-rtk-break-claudes-prompt-cache).
 
 ## Go further with pipelines
 
 Everything RTK does is written in one file, `pipeline.toml`: where RTK acts, when, and what it does. With no file you are on `rtk:default`, which is exactly the compressor above. Everything else is opt-in, one line at a time.
 
-| Where RTK acts | What it can do | On by default |
-|---|---|---|
-| Before a tool runs (agent hooks) | Rewrite a shell command through `rtk`, block a call, or route it to a cheaper model | Shell rewrite |
-| After a tool runs (agent hooks) | Compress the output before the agent reads it | No: `rtk:posthook` |
-| API traffic ([RTK Proxy](#rtk-proxy-optional)) | Strip ANSI codes, progress bars and repeated lines from tool results, place the cache breakpoint, carry delegated calls | Noise stripping, once the proxy runs |
-| Agent instructions (directives) | Tell the agent how to write and which commands to use | RTK awareness |
-| Tasks | Commands that hand heavy work to a cheaper model you choose | No: needs a model |
+<p align="center">
+  <img src=".github/assets/where-rtk-acts.png" alt="Where rtk acts: before each tool call it rewrites, blocks or routes the command (on by default); after the tool it can compress the output (opt-in); the RTK Proxy sits between the agent and the model provider (opt-in); tasks hand heavy reads to a cheaper model (opt-in); directives tell the agent how to behave">
+</p>
 
 Built-in pipelines, each one line away:
 
@@ -150,7 +140,7 @@ rtk gain                                 # what it saved on your own traffic
 
 ## RTK Proxy (optional)
 
-The `rtk-proxy` daemon runs the same pipeline on your agent's **provider-API traffic**. It sits between your agent and the provider: it strips bytes no model ever needed before forwarding, without breaking the prompt cache, and carries the calls your pipeline routes to cheaper models, so they borrow the credential your agent already sends and show up in `rtk gain`. It can also place prompt-cache breakpoints where the agent leaves them open (opt-in).
+The `rtk-proxy` daemon runs the same pipeline on your agent's **provider-API traffic**: it strips bytes no model ever needed without breaking the prompt cache, and carries the calls your pipeline routes to cheaper models on the credential your agent already sends, so they show up in `rtk gain`. `rtk init -g` offers to set it up; `rtk claude` starts it and launches Claude through it with no configuration at all.
 
 ```bash
 rtk claude              # start the daemon if needed, then launch Claude through it
@@ -158,47 +148,35 @@ rtk llm-proxy status    # is it up
 rtk gain                # savings, command filtering and proxy side by side
 ```
 
-**Two independent ways in**, because not every harness has a session hook:
-
-| | What it does |
-|---|---|
-| `rtk init -g` | Offers to set it up once: writes the base URL and the `rtk:proxy` pipeline, then asks how the daemon should come back after a reboot — SessionStart hook, background service, or neither. |
-| `rtk <harness>` | No configuration at all. Starts the daemon, points the harness at it, then execs it. Needs no hook system, which is why it covers harnesses that have none. |
-
-`rtk <harness>` resolving is itself the signal that traffic really goes through the daemon — the subcommand exists only where redirection is verified. Today that is `rtk claude`. A harness without one is never silently unproxied: it falls through to plain passthrough, and `rtk llm-proxy setup` lists what can be launched.
-
-It is a separate binary under a separate licence (BUSL-1.1), shipped as its own `rtk-proxy-<target>` archive — `rtk` never links it. Not the same thing as `rtk bypass`, which runs one local command unfiltered (`rtk proxy <cmd>` is its deprecated alias).
+Separate binary, separate licence (BUSL-1.1), its own `rtk-proxy-<target>` archive: `rtk` never links it. Not the same thing as `rtk bypass`, which runs one local command unfiltered.
 
 > Setup and subcommands: **[RTK Proxy](https://www.rtk-ai.app/docs/proxy/overview/)** · what it compresses: **[What the Proxy Compresses](https://www.rtk-ai.app/docs/proxy/compression/)** · settings and endpoints: **[Proxy Configuration](https://www.rtk-ai.app/docs/proxy/configuration/)**
 
 ## Works in your agent
 
-RTK supports 18 AI coding tools. Where the agent offers a hook, `rtk init` installs it and compression is automatic; where it only reads a rules file, RTK asks the model to use `rtk` commands.
+RTK supports 18 AI coding tools. With a **hook** or **plugin**, `rtk init` installs it and compression is automatic. With a **rules file**, RTK asks the model to prefer `rtk` commands instead.
 
-| Tool | Install | Method |
-|------|---------|--------|
-| **Claude Code** | `rtk init -g` | PreToolUse hook (native binary) |
-| **GitHub Copilot (VS Code)** | `rtk init -g --copilot` | PreToolUse hook — transparent rewrite |
-| **GitHub Copilot CLI** | `rtk init -g --copilot` | PreToolUse deny-with-suggestion (CLI limitation) |
-| **Cursor** | `rtk init -g --agent cursor` | preToolUse hook (hooks.json) |
-| **Gemini CLI** | `rtk init -g --gemini` | BeforeTool hook |
-| **Codex** | `rtk init -g --codex` | PreToolUse hook (`updatedInput`) + AGENTS.md |
-| **Windsurf** | `rtk init -g --agent windsurf` | .windsurfrules (project-scoped) |
-| **Cline / Roo Code** | `rtk init --agent cline` | .clinerules (project-scoped) |
-| **OpenCode** | `rtk init -g --opencode` | Plugin TS (execute.before / tool.execute.before), needs 1.18.29 or newer |
-| **OpenClaw** | `openclaw plugins install ./openclaw` | Plugin TS (before_tool_call) |
-| **Pi** | `rtk init -g --agent pi` (global) | TypeScript extension (tool_call) |
-| **Oh My Pi (OMP)** | `rtk init -g --agent omp` (global) / `rtk init --agent omp` (project) | TypeScript extension (tool_call, shared with Pi) |
-| **Hermes** | `rtk init --agent hermes` | Python plugin adapter (terminal command mutation via `rtk rewrite`) |
-| **Mistral Vibe** | `rtk init -g --agent vibe` | `pre_tool` hook (hooks.toml) |
-| **Kilo Code** | `rtk init --agent kilocode` | .kilocode/rules/rtk-rules.md (project-scoped) |
-| **Google Antigravity** | `rtk init --agent antigravity` / `rtk init -g --agent antigravity` | .agents/plugins/rtk/ (project) or ~/.gemini/config/plugins/rtk/ (global): plugin.json, hooks.json, rules/AGENTS.md |
-| **Kimi AI** | `rtk init --agent kimi` | AGENTS.md (project-scoped) |
-| **Factory Droid** | `rtk init -g --agent droid` (or per-project) | PreToolUse hook in `~/.factory/hooks.json` (matcher `Execute`) |
-| **Trae** | `rtk init --agent trae` | Native `PreToolUse` hook in `.trae/hooks.json` (`RunCommand`) |
-| **Trae (global)** | `rtk init -g --agent trae` | `~/.trae/hooks.json`, plus `~/.trae-cn/hooks.json` when that directory exists |
+| Tool | Install | How |
+|------|---------|-----|
+| **Claude Code** | `rtk init -g` | hook |
+| **GitHub Copilot** (VS Code, CLI) | `rtk init -g --copilot` | hook |
+| **Cursor** | `rtk init -g --agent cursor` | hook |
+| **Gemini CLI** | `rtk init -g --gemini` | hook |
+| **Codex** | `rtk init -g --codex` | hook |
+| **Mistral Vibe** | `rtk init -g --agent vibe` | hook |
+| **Factory Droid** | `rtk init -g --agent droid` | hook |
+| **Trae** | `rtk init --agent trae` (or `-g`) | hook |
+| **OpenCode** (1.18.29+) | `rtk init -g --opencode` | plugin |
+| **OpenClaw** | `openclaw plugins install ./openclaw` | plugin |
+| **Pi** / **Oh My Pi** | `rtk init -g --agent pi` / `--agent omp` | plugin |
+| **Hermes** | `rtk init --agent hermes` | plugin |
+| **Windsurf** | `rtk init -g --agent windsurf` | rules file |
+| **Cline / Roo Code** | `rtk init --agent cline` | rules file |
+| **Kilo Code** | `rtk init --agent kilocode` | rules file |
+| **Google Antigravity** | `rtk init --agent antigravity` (or `-g`) | rules file |
+| **Kimi AI** | `rtk init --agent kimi` | rules file |
 
-Per-agent setup, override controls and graceful degradation: **[Supported Agents](https://www.rtk-ai.app/docs/getting-started/supported-agents/)**. The Hermes plugin source and tests live in `hooks/hermes/`; installed Hermes runtime files still live under `~/.hermes/plugins/rtk-rewrite/`.
+Per-agent setup, what each hook API allows, override controls: **[Supported Agents](https://www.rtk-ai.app/docs/getting-started/supported-agents/)** · **[Agent Coverage](https://www.rtk-ai.app/docs/resources/agent-coverage/)**
 
 ## Measure it
 
@@ -215,7 +193,7 @@ rtk discover --all --since 7    # All projects, last 7 days
 rtk session                     # Show RTK adoption across recent sessions
 ```
 
-**What the numbers mean.** The compressor reduces the **command output** your agent reads. That is what it measures, and it is not the same as cutting your bill by the same amount. Command output is **one contributor to input tokens**, alongside your prompt, the system prompt and conversation history. Input tokens are in turn **only part of the bill**, which also counts output tokens. The reduction dilutes at every step. The token counts RTK reports are estimated as `bytes / 4` — RTK ships no tokenizer, so the **percentages are reliable but the absolute token numbers are approximate**.
+**What the numbers mean.** The compressor reduces the **command output** your agent reads, which is one part of the input tokens, which are one part of the bill: a 90% cut in command output is not a 90% cut in cost. Token counts are estimated as `bytes / 4`, so the percentages are reliable and the absolute numbers are approximate.
 
 > Full explanation: [How RTK Savings Work](docs/guide/resources/savings-explained.md) · attribution, the live dashboard and export formats: **[Token Savings Analytics](https://www.rtk-ai.app/docs/analytics/gain/)**
 
