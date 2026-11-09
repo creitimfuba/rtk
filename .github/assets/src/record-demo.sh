@@ -9,7 +9,8 @@
 # shim in $WORK/bin points `rtk` at the release build inside that HOME. Claude
 # is told to load only the hook `rtk init -g` just wrote, nothing from your own
 # settings. That HOME's path is shown as ~ in the output, which is the only
-# change made to what the commands printed.
+# change made to what the commands printed. The shim also sets
+# RTK_TELEMETRY_DISABLED=1, so `rtk init -g` asks no telemetry question here.
 set -e
 WORK="${WORK:?set WORK to an empty directory}"
 CRATE="${CRATE:?set CRATE to the crate the agent will test}"
@@ -20,7 +21,7 @@ mkdir -p "$WORK/home" "$WORK/bin"
 cat > "$WORK/bin/rtk" <<EOF
 #!/bin/sh
 unset RTK_DB_PATH RTK_CONFIG_DIR RTK_TEE_DIR RTK_RECALL_DB
-HOME="$WORK/home" exec "$RTK" "\$@"
+HOME="$WORK/home" RTK_TELEMETRY_DISABLED=1 exec "$RTK" "\$@"
 EOF
 chmod +x "$WORK/bin/rtk"
 printf 'export PATH="%s/bin:$PATH"\n' "$WORK" > "$WORK/env.sh"
@@ -48,7 +49,7 @@ for c in sys.argv[1]:
 print()' "\$1"; sleep 0.6; }
 sleep 1
 type_cmd "rtk init -g"
-(sleep 1.5; echo y; sleep 1.4; echo n; sleep 1.2; echo n; sleep 1.2; echo n; sleep 1.5) | script -q /dev/null rtk init -g 2>&1 | python3 -I "$WORK/pathfilter.py" "$WORK/home" "~"
+(sleep 1.5; echo y; sleep 1.4; echo n; sleep 1.2; echo n; sleep 1.5) | script -q /dev/null rtk init -g 2>&1 | python3 -I "$WORK/pathfilter.py" "$WORK/home" "~"
 sleep 1.5
 type_cmd 'claude -p "Run the test suite and tell me what fails."'
 CLAUDE_ENV_FILE="$WORK/env.sh" claude -p "Run the test suite and tell me what fails." --model sonnet --setting-sources project --settings "$WORK/home/.claude/settings.json" --append-system-prompt "\$(cat "$WORK/home/.claude/RTK.md")" --strict-mcp-config --no-session-persistence --allowedTools Bash 2>&1
