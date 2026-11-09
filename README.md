@@ -226,7 +226,7 @@ Nothing changes for the developer. No secret value ever leaves the machine. The 
 | **Just you?** | **Your team, or the whole company?** |
 |---|---|
 | The **Dev** plan: guardrails and analytics for one developer. Your own dashboard of spend per project and per model, the Shield and policies on your machine, nothing to administer. | **Teams**, **Business** and **Enterprise**: the full control layer for every developer, with SSO and the audit log, scaled across the organisation, up to on-premise deployment and a custom SLA. |
-| [Plans and what each includes →](https://pro.rtk-ai.app/pricing) | [See what it is worth for your team →](https://pro.rtk-ai.app/#savings) · [Talk to us →](https://pro.rtk-ai.app/contact) |
+| [Plans and what each includes →](https://pro.rtk-ai.app/pricing) | [See what it is worth for your team →](https://pro.rtk-ai.app/pricing) · [Talk to us →](https://pro.rtk-ai.app/contact) |
 
 <br>
 
