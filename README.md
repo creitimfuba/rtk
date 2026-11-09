@@ -309,7 +309,11 @@ Join the community on [Discord](https://discord.gg/RySmvNF5kF).
 
 ## RTK Pro
 
-Need control over your company's AI agent fleet? RTK Pro is the control layer for cost, security and governance across all your agents: [pro.rtk-ai.app](https://pro.rtk-ai.app).
+<a href="https://pro.rtk-ai.app">
+  <img src=".github/assets/rtk-pro.png" alt="RTK Pro: scale AI agents, stay in control. The control layer for every AI agent in your company. Observability: spend by team, person and model. Shield: secrets masked before the model sees them. Policies: risky commands stopped before they run. Audit: every action on record. Runs on each developer's machine, never a secret value leaves it, the CLI stays free and open source.">
+</a>
+
+RTK runs on each developer's machine. [RTK Pro](https://pro.rtk-ai.app) connects them into one control layer for your company.
 
 ## Disclaimer
 

@@ -11,3 +11,4 @@ render() { "$CHROME" --headless --disable-gpu --hide-scrollbars --force-device-s
 render rtk-banner 1280,400
 render before-after 1280,560
 render go-further 1280,600
+render rtk-pro 1280,520
