@@ -212,7 +212,16 @@ Separate binary, separate licence (BUSL-1.1), its own `rtk-proxy-<target>` archi
   <img src=".github/assets/rtk-pro.png" alt="RTK Pro: scale AI agents, stay in control. The control layer for every AI agent in your company. Gateway: every AI call in one place, whichever provider; spend by team, person and model; budgets that warn, then stop. Shield: secrets and personal data masked before any model sees them. Policies: risky commands stopped before they run. Team catalog: skills, MCP servers and pipelines, assigned per team and project. Audit: who did what, and whether it was allowed, every action on record. Runs on each developer's machine, never a secret value leaves it, the CLI stays free and open source.">
 </a>
 
-RTK runs on each developer's machine. **[RTK Pro](https://pro.rtk-ai.app)** connects them into one control layer for the whole company: a **company gateway** that every AI call goes through, whichever provider each team uses, with **cost control** (spend by team, person and model, waste found and removed, budgets that warn, then stop), a **Shield** that masks secrets and personal data before any model sees them, **policies** that stop risky commands before they run, a **team catalog** of skills, MCP servers and pipelines assigned per team and project, and an **audit log** of who did what and whether it was allowed. Nothing changes for the developer, no secret value ever leaves the machine, and the CLI stays free and open source.
+RTK runs on each developer's machine. **[RTK Pro](https://pro.rtk-ai.app)** connects them into one control layer for the whole company:
+
+- **Gateway.** Every AI call goes through one place, whichever provider each team uses.
+- **Cost control.** Spend by team, person and model. Waste found and removed. Budgets that warn, then stop.
+- **Shield.** Secrets and personal data masked before any model sees them.
+- **Policies.** Risky commands stopped before they run.
+- **Team catalog.** Skills, MCP servers and pipelines, assigned per team and project.
+- **Audit log.** Who did what, and whether it was allowed.
+
+Nothing changes for the developer. No secret value ever leaves the machine. The CLI stays free and open source.
 
 | **Just you?** | **Your team, or the whole company?** |
 |---|---|
