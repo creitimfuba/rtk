@@ -48,7 +48,7 @@
 <br>
 
 **① Install & forget: up to 90% less command output.**
-Test runs, diffs, logs and builds are compressed before your agent reads them. 100+ commands, no config, nothing changes in how you work. `rtk gain` shows what you saved.
+Test runs, diffs, logs and builds are compressed before your agent reads them. 100+ commands, under 25 ms per command, no config, nothing changes in how you work. `rtk gain` shows what you saved.
 
 **② Go further with pipelines, as far as you take it.**
 Hand heavy reads to a cheaper model, compress more than bash, clean the API traffic without breaking the prompt cache. One agent-agnostic file: start from a built-in, install one someone shared, or write and share your own.
