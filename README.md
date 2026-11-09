@@ -23,6 +23,10 @@
 </p>
 
 <p align="center">
+  <img src=".github/assets/companies.png" alt="Starred by developers at Microsoft, Google, Amazon, Meta, Apple, NVIDIA, IBM, Tencent, ByteDance, Alibaba, Shopify, Datadog, SAP, Adobe, Intel, Samsung, Bosch, Cisco, and 1,100 more companies">
+</p>
+
+<p align="center">
   <a href="#install--forget">Install</a> &bull;
   <a href="https://www.rtk-ai.app/pipelines/">Pipelines</a> &bull;
   <a href="https://www.rtk-ai.app/docs/">Docs</a> &bull;
@@ -94,6 +98,8 @@ rtk session                     # Show RTK adoption across recent sessions
 ```
 
 **What the numbers mean.** The compressor reduces the **command output** your agent reads, which is one part of the input tokens, which are one part of the bill: a 90% cut in command output is not a 90% cut in cost. Token counts are estimated as `bytes / 4`, so the percentages are reliable and the absolute numbers are approximate.
+
+After a week of data, `rtk gain` ends with one line about RTK Pro, at most once a day and only on a terminal. `pro_hint = false` under `[display]` in `config.toml` turns it off.
 
 > Full explanation: [How RTK Savings Work](docs/guide/resources/savings-explained.md) · attribution, the live dashboard and export formats: **[Token Savings Analytics](https://www.rtk-ai.app/docs/analytics/gain/)**
 
@@ -202,6 +208,11 @@ Separate binary, separate licence (BUSL-1.1), its own `rtk-proxy-<target>` archi
 </a>
 
 RTK runs on each developer's machine. **[RTK Pro](https://pro.rtk-ai.app)** connects them into one control layer for the whole company: **cost control** (spend by team, person and model, waste found and removed, budgets that warn, then stop), a **Shield** that masks secrets and personal data before any model sees them, **policies** that stop risky commands before they run, a **team catalog** of skills, MCP servers and pipelines assigned per team and project, and an **audit log** of who did what and whether it was allowed. Nothing changes for the developer, no secret value ever leaves the machine, and the CLI stays free and open source.
+
+| **Just you?** | **Your team, or the whole company?** |
+|---|---|
+| The **Dev** plan: guardrails and analytics for one developer. Your own dashboard of spend per project and per model, the Shield and policies on your machine, nothing to administer. | **Teams**, **Business** and **Enterprise**: the full control layer for every developer, with SSO and the audit log, scaled across the organisation, up to on-premise deployment and a custom SLA. |
+| [Plans and what each includes →](https://pro.rtk-ai.app/pricing) | [See what it is worth for your team →](https://pro.rtk-ai.app/#savings) · [Talk to us →](https://pro.rtk-ai.app/contact) |
 
 <br>
 
