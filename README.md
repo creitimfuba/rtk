@@ -69,7 +69,7 @@ Restart your agent. That's it: when it runs `git status`, RTK runs `rtk git stat
 The part 85k developers starred. Built by 200+ contributors, written against real command output, and every filter has to cut at least 20% to ship.
 
 <p align="center">
-  <img src=".github/assets/before-after.png" alt="cargo test: 65 lines of raw output on the left; on the right, the 5 lines the agent reads with rtk: the failing test, its assertion, its location, and the pass/fail count">
+  <img src=".github/assets/before-after.png" alt="cargo test on a 48-test crate: 71 lines of raw output on the left; on the right, the 11 lines the agent reads with rtk: the failing test's panic, assertion and location, the pass/fail summary, and an rtk recall line to get the full output back">
 </p>
 
 | Operation | What the agent reads |
@@ -103,7 +103,7 @@ The hook rewrites shell commands. Built-in tools such as `Read`, `Grep` and `Glo
 Everything RTK does is written in one file, `pipeline.toml`: where RTK acts, when, and what it does. With no file you are on `rtk:default`, which is exactly the compressor above. Everything else is opt-in, one line at a time.
 
 <p align="center">
-  <img src=".github/assets/where-rtk-acts.png" alt="Where rtk acts: before each tool call it rewrites, blocks or routes the command (on by default); after the tool it can compress the output (opt-in); the RTK Proxy sits between the agent and the model provider (opt-in); tasks hand heavy reads to a cheaper model (opt-in); directives tell the agent how to behave">
+  <img src=".github/assets/go-further.png" alt="Four things a pipeline turns on, one line each: less command output (on by default, up to 90% less); every tool compressed, not just the shell (Claude Code); big files read by a cheaper model you choose (Claude Code, your API key); clean API traffic through the optional proxy. Below: install a pipeline someone shared or share yours; the best one listed cuts total cost by 20.2% in its author's benchmark">
 </p>
 
 Built-in pipelines, each one line away:

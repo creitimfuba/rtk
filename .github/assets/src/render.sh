@@ -10,4 +10,4 @@ render() { "$CHROME" --headless --disable-gpu --hide-scrollbars --force-device-s
   --screenshot="../$1.png" "file://$PWD/$1.html" >/dev/null 2>&1; echo "../$1.png"; }
 render rtk-banner 1280,400
 render before-after 1280,560
-render where-rtk-acts 1280,640
+render go-further 1280,600
