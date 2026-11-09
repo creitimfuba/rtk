@@ -163,43 +163,28 @@ The hook rewrites shell commands. Built-in tools such as `Read`, `Grep` and `Glo
 
 ## Want to go further? Pipelines.
 
-Everything RTK does is written in one file, `pipeline.toml`: where RTK acts, when, and what it does. With no file you are on `rtk:default`, which is exactly the compressor above. Everything else is opt-in, one line at a time.
+Out of the box, RTK compresses command output and stops there. A pipeline is how you ask it for more: one small file that tells RTK what to do with what your agent reads and sends. No file means the compressor above and nothing else; a pipeline adds one thing at a time, and you can take it back out.
 
 <p align="center">
   <img src=".github/assets/go-further.png" alt="Four things a pipeline turns on, one line each: less command output (on by default, up to 90% less); every tool compressed, not just the shell (Claude Code); big files read by a cheaper model you choose (Claude Code, your API key); clean API traffic through the optional proxy. Below: install a pipeline someone shared or share yours; the best one listed cuts total cost by 20.2% in its author's benchmark">
 </p>
 
-**Built-in pipelines, each one line away**
+**What people turn on first**
 
-| Pipeline | What it adds | Works in |
-|---|---|---|
-| `rtk:default` | The bash compressor. What you have with no pipeline file | Every agent with a hook |
-| `rtk:posthook` | Compresses `Read`, grep and web output too, not just shell commands | Claude Code |
-| `rtk:delegate-reads` | Whole-file reads over 350 lines are answered by a cheaper model: the file never enters the agent's context | Claude Code, with a model you choose |
-| `rtk:proxy` | Places the prompt-cache breakpoint for clients that set none | Agents you can point at the RTK Proxy |
-| `rtk:terse` | The agent writes terse prose; code, paths, commands and errors stay in full | Every agent with RTK's instruction file |
+- **Compress everything the agent reads**, not just shell output: grep results, web pages, lockfiles, any output RTK has no filter for (Claude Code).
+- **Hand big file reads to a cheaper model** you choose. The file never enters your agent's context (Claude Code, with your API key).
+- **Clean the API traffic** your agent re-sends every turn, with the prompt cache kept intact (through the optional proxy, below).
+- **Make the agent write less**: terse prose, with code, paths, commands and errors kept in full (every agent).
 
-```toml
-# ~/.config/rtk/pipeline.toml
-[pipeline]
-extends = ["rtk:posthook", "rtk:proxy"]
-```
-
-`rtk pipeline show rtk:default` prints the built-in file. Change one line of it, or write your own rules.
-
-**Agent-agnostic.** You write `shell`, `read`, `before_tool`; RTK translates them to each agent's hooks. A pipeline written once works in every agent RTK supports, as far as that agent's hooks allow: **[Agent Coverage](https://www.rtk-ai.app/docs/resources/agent-coverage/)** shows exactly what runs where.
-
-**Share yours, or install one**
+Each of these is a built-in pipeline, one line to turn on. **[rtk-ai.app/pipelines](https://www.rtk-ai.app/pipelines/)** lists them next to the pipelines the community shares, each with what it saved and how that was measured. Installing one is a single command:
 
 ```bash
-rtk pipeline share publish               # publish your pipeline: GitHub repo or gist
-rtk pipeline add github:user/repo        # validate and install a shared pipeline
-rtk gain                                 # what it saved on your own traffic
+rtk pipeline add github:user/repo        # check and install a shared pipeline
 ```
 
-**[rtk-ai.app/pipelines](https://www.rtk-ai.app/pipelines/)** lists pipelines with what each one saved and how it was measured. More are tagged [`rtk-pipeline`](https://github.com/topics/rtk-pipeline) on GitHub. A pipeline can rewrite commands and send content to the models it declares, so read its file before you install it.
+A pipeline can rewrite commands and send content to the models it declares, so read its file before you install it. Written once, a pipeline works in every agent RTK supports, as far as that agent's hooks allow: **[Agent Coverage](https://www.rtk-ai.app/docs/resources/agent-coverage/)** shows what runs where.
 
-> The tour: **[Pipelines](https://www.rtk-ai.app/docs/pipelines/overview/)** · the reference: **[Writing a Pipeline](https://www.rtk-ai.app/docs/pipelines/writing-pipelines/)**, **[Conditions and Judges](https://www.rtk-ai.app/docs/pipelines/conditions/)**, **[Methods](https://www.rtk-ai.app/docs/pipelines/methods/)**, **[Tasks and Upstreams](https://www.rtk-ai.app/docs/pipelines/tasks/)**, **[Reference Pipelines](https://www.rtk-ai.app/docs/pipelines/reference-pipelines/)** · the commands: **[Pipeline Commands](https://www.rtk-ai.app/docs/pipelines/commands/)** · your own methods: **[Plugins](https://www.rtk-ai.app/docs/pipelines/plugins/)**
+> Start here: **[Pipelines](https://www.rtk-ai.app/docs/pipelines/overview/)** · the built-ins, explained: **[Reference Pipelines](https://www.rtk-ai.app/docs/pipelines/reference-pipelines/)** · write and share your own: **[Writing a Pipeline](https://www.rtk-ai.app/docs/pipelines/writing-pipelines/)**, **[Pipeline Commands](https://www.rtk-ai.app/docs/pipelines/commands/)**
 
 ### RTK Proxy (optional)
 
