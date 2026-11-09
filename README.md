@@ -44,7 +44,7 @@
 <br>
 
 **① Install & forget: up to 90% less command output.**
-Test runs, diffs, logs and builds are compressed before your agent reads them. 100+ commands, no config, nothing changes in how you work.
+Test runs, diffs, logs and builds are compressed before your agent reads them. 100+ commands, no config, nothing changes in how you work. `rtk gain` shows what you saved.
 
 **② Go further with pipelines, as far as you take it.**
 Hand heavy reads to a cheaper model, compress more than bash, clean the API traffic without breaking the prompt cache. One agent-agnostic file: start from a built-in, install one someone shared, or write and share your own.
@@ -73,6 +73,29 @@ Restart your agent. That's it: when it runs `git status`, RTK runs `rtk git stat
 > Another project named "rtk" exists on crates.io. Check you have this one: `rtk gain` must show the savings dashboard, not "command not found".
 >
 > Cargo, pre-built binaries, native Windows, WSL and uninstall: **[Installation guide](https://www.rtk-ai.app/docs/getting-started/installation/)** · per-agent setup and `--dry-run`: **[Quick Start](https://www.rtk-ai.app/docs/getting-started/quick-start/)**
+
+<br>
+
+## Measure it: `rtk gain`
+
+Every command RTK touches is counted on your machine. One command shows what it saved, today and since you installed it.
+
+```bash
+rtk gain                        # Summary stats
+rtk gain --graph                # ASCII graph (last 30 days)
+rtk gain --history              # Recent command history
+rtk gain --daily                # Day-by-day breakdown
+rtk gain --all --format json    # JSON export for dashboards
+
+rtk discover                    # Find missed savings opportunities
+rtk discover --all --since 7    # All projects, last 7 days
+
+rtk session                     # Show RTK adoption across recent sessions
+```
+
+**What the numbers mean.** The compressor reduces the **command output** your agent reads, which is one part of the input tokens, which are one part of the bill: a 90% cut in command output is not a 90% cut in cost. Token counts are estimated as `bytes / 4`, so the percentages are reliable and the absolute numbers are approximate.
+
+> Full explanation: [How RTK Savings Work](docs/guide/resources/savings-explained.md) · attribution, the live dashboard and export formats: **[Token Savings Analytics](https://www.rtk-ai.app/docs/analytics/gain/)**
 
 <br>
 
@@ -211,27 +234,6 @@ RTK supports 18 AI coding tools. With a **hook** or **plugin**, `rtk init` insta
 | **Kimi AI** | `rtk init --agent kimi` | rules file |
 
 Per-agent setup, what each hook API allows, override controls: **[Supported Agents](https://www.rtk-ai.app/docs/getting-started/supported-agents/)** · **[Agent Coverage](https://www.rtk-ai.app/docs/resources/agent-coverage/)**
-
-<br>
-
-## Measure it
-
-```bash
-rtk gain                        # Summary stats
-rtk gain --graph                # ASCII graph (last 30 days)
-rtk gain --history              # Recent command history
-rtk gain --daily                # Day-by-day breakdown
-rtk gain --all --format json    # JSON export for dashboards
-
-rtk discover                    # Find missed savings opportunities
-rtk discover --all --since 7    # All projects, last 7 days
-
-rtk session                     # Show RTK adoption across recent sessions
-```
-
-**What the numbers mean.** The compressor reduces the **command output** your agent reads, which is one part of the input tokens, which are one part of the bill: a 90% cut in command output is not a 90% cut in cost. Token counts are estimated as `bytes / 4`, so the percentages are reliable and the absolute numbers are approximate.
-
-> Full explanation: [How RTK Savings Work](docs/guide/resources/savings-explained.md) · attribution, the live dashboard and export formats: **[Token Savings Analytics](https://www.rtk-ai.app/docs/analytics/gain/)**
 
 <br>
 
