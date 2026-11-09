@@ -68,11 +68,27 @@ The community built the bash compressor 85k developers starred. Now it is buildi
 
 ## Install & forget
 
-```bash
-brew install rtk                 # macOS / Linux
-winget install rtk-ai.rtk        # Windows
-curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+**macOS, and Linux with Homebrew**
 
+```bash
+brew install rtk
+```
+
+**Windows, with winget**
+
+```bash
+winget install rtk-ai.rtk
+```
+
+**Linux, macOS or WSL, with the install script**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+```
+
+**Then plug it into your agent**
+
+```bash
 rtk init -g                      # Claude Code; every other agent: see "Works in your agent"
 ```
 
