@@ -21,6 +21,7 @@
   <a href="https://www.rtk-ai.app/pipelines/">Pipelines</a> &bull;
   <a href="https://www.rtk-ai.app/docs/">Docs</a> &bull;
   <a href="https://www.rtk-ai.app">Website</a> &bull;
+  <a href="https://pro.rtk-ai.app">RTK Pro</a> &bull;
   <a href="https://discord.gg/RySmvNF5kF">Discord</a>
 </p>
 
@@ -47,6 +48,8 @@ Test runs, diffs, logs and builds are compressed before your agent reads them. 1
 
 **② Go further with pipelines, as far as you take it.**
 The community built the bash compressor 85k developers starred. Now it is building pipelines. Hand heavy reads to a cheaper model, compress more than bash, clean the API traffic without breaking the prompt cache. One agent-agnostic file: start from a built-in, install one someone shared, or write and share your own. The best one listed today cuts total cost by 20.2% in its [author's benchmark](https://www.rtk-ai.app/pipelines/).
+
+**Running agents across a team?** [RTK Pro](https://pro.rtk-ai.app) is the control layer for every AI agent in your company: spend, secrets, policies, audit. [Take back control ↓](#running-agents-across-a-team-take-back-control)
 
 ## Install & forget
 
@@ -98,7 +101,7 @@ The hook rewrites shell commands. Built-in tools such as `Read`, `Grep` and `Glo
 
 > **Does RTK break the prompt cache?** No: output is filtered once, before it enters the conversation. [Details](docs/guide/resources/troubleshooting.md#does-rtk-break-claudes-prompt-cache).
 
-## Go further with pipelines
+## Want to go further? Pipelines.
 
 Everything RTK does is written in one file, `pipeline.toml`: where RTK acts, when, and what it does. With no file you are on `rtk:default`, which is exactly the compressor above. Everything else is opt-in, one line at a time.
 
@@ -151,6 +154,14 @@ rtk gain                # savings, command filtering and proxy side by side
 Separate binary, separate licence (BUSL-1.1), its own `rtk-proxy-<target>` archive: `rtk` never links it. Not the same thing as `rtk bypass`, which runs one local command unfiltered.
 
 > Setup and subcommands: **[RTK Proxy](https://www.rtk-ai.app/docs/proxy/overview/)** · what it compresses: **[What the Proxy Compresses](https://www.rtk-ai.app/docs/proxy/compression/)** · settings and endpoints: **[Proxy Configuration](https://www.rtk-ai.app/docs/proxy/configuration/)**
+
+## Running agents across a team? Take back control.
+
+<a href="https://pro.rtk-ai.app">
+  <img src=".github/assets/rtk-pro.png" alt="RTK Pro: scale AI agents, stay in control. The control layer for every AI agent in your company. Observability: spend by team, person and model. Shield: secrets masked before the model sees them. Policies: risky commands stopped before they run. Audit: every action on record. Runs on each developer's machine, never a secret value leaves it, the CLI stays free and open source.">
+</a>
+
+RTK runs on each developer's machine. **[RTK Pro](https://pro.rtk-ai.app)** connects them into one control layer: see what each team spends, keep secrets and risky commands from ever reaching a model, and prove who did what. The CLI stays free and open source.
 
 ## Works in your agent
 
@@ -306,14 +317,6 @@ The `rtk` CLI is **Apache-2.0** — see [LICENSE](LICENSE). It links one compone
 Contributions welcome: a new filter, a fix, or a pipeline you publish with `rtk pipeline share publish`. Open an issue or PR on [GitHub](https://github.com/rtk-ai/rtk) and read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
 Join the community on [Discord](https://discord.gg/RySmvNF5kF).
-
-## RTK Pro
-
-<a href="https://pro.rtk-ai.app">
-  <img src=".github/assets/rtk-pro.png" alt="RTK Pro: scale AI agents, stay in control. The control layer for every AI agent in your company. Observability: spend by team, person and model. Shield: secrets masked before the model sees them. Policies: risky commands stopped before they run. Audit: every action on record. Runs on each developer's machine, never a secret value leaves it, the CLI stays free and open source.">
-</a>
-
-RTK runs on each developer's machine. [RTK Pro](https://pro.rtk-ai.app) connects them into one control layer for your company.
 
 ## Disclaimer
 
