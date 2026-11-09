@@ -56,6 +56,10 @@ The community built the bash compressor 85k developers starred. Now it is buildi
 
 **Agents across the whole company?** [RTK Pro](https://pro.rtk-ai.app) is the control layer for every AI agent: costs, secrets and personal data, policies, team catalog, audit. [Discover RTK Pro ↓](#agents-across-the-whole-company-know-what-they-cost-what-they-touch-and-who-ran-what)
 
+<p align="center">
+  <img src=".github/assets/demo.gif" alt="A real terminal session, sped up. rtk init -g registers the hook. claude -p is asked to run the test suite and answers that 3 of 281 tests fail, naming each one with its assertion. rtk gain then shows 2 commands, 3.4K tokens saved, 93.3%: rtk cargo test at 94.2% and rtk ls at 82.3%.">
+</p>
+
 <br>
 
 ---
