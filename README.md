@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-  <img src=".github/assets/companies.png" alt="Starred by developers at Microsoft, Google, Amazon, Meta, Apple, NVIDIA, IBM, Tencent, ByteDance, Alibaba, Shopify, Datadog, SAP, Adobe, Intel, Samsung, Bosch, Cisco, and 1,100 more companies">
+  <img src=".github/assets/companies.png" alt="Starred by developers at Microsoft, Google, Amazon, Meta, Apple, NVIDIA, IBM, Tencent, ByteDance, Alibaba, Shopify, Datadog, SAP, Adobe, Intel, Samsung, Bosch, Cisco, JPMorgan Chase, Oracle, Netflix, Toyota, Salesforce, Siemens, Accenture, Uber, Spotify, and 1,100+ more companies">
 </p>
 
 <p align="center">
