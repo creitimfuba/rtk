@@ -155,7 +155,7 @@ rtk bypass git log --oneline -20        # full git log, no truncation
 rtk bypass npm install express          # raw npm output
 ```
 
-The hook rewrites shell commands. Built-in tools such as `Read`, `Grep` and `Glob` pass through untouched on the default pipeline; in Claude Code, `rtk:posthook` compresses them too (see below).
+The hook rewrites shell commands. Built-in tools such as `Read`, `Grep` and `Glob` pass through untouched out of the box; in Claude Code, a pipeline compresses them too (see [Pipelines](#want-to-go-further-pipelines) below).
 
 > **Does RTK break the prompt cache?** No: output is filtered once, before it enters the conversation. [Details](docs/guide/resources/troubleshooting.md#does-rtk-break-claudes-prompt-cache).
 
