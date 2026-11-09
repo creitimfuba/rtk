@@ -17,6 +17,12 @@
 </p>
 
 <p align="center">
+ <a href="https://www.star-history.com/rtk-ai/rtk">
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=rank&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=rank" /><img alt="Star History Rank" src="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=rank" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=trending&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=trending" /><img alt="GitHub Trending Repository of the Day" src="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=trending" /></picture>
+ </a>
+</p>
+
+<p align="center">
   <a href="#install--forget">Install</a> &bull;
   <a href="https://www.rtk-ai.app/pipelines/">Pipelines</a> &bull;
   <a href="https://www.rtk-ai.app/docs/">Docs</a> &bull;
@@ -35,21 +41,22 @@
   <a href="README_pt.md">Português</a>
 </p>
 
----
-
-<p align="center">
- <a href="https://www.star-history.com/rtk-ai/rtk">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=rank&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=rank" /><img alt="Star History Rank" src="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=rank" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=trending&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=trending" /><img alt="GitHub Trending Repository of the Day" src="https://api.star-history.com/badge?repo=rtk-ai/rtk&type=trending" /></picture>
- </a>
-</p>
+<br>
 
 **① Install & forget: up to 90% less command output.**
 Test runs, diffs, logs and builds are compressed before your agent reads them. 100+ commands, no config, nothing changes in how you work.
 
 **② Go further with pipelines, as far as you take it.**
-The community built the bash compressor 85k developers starred. Now it is building pipelines. Hand heavy reads to a cheaper model, compress more than bash, clean the API traffic without breaking the prompt cache. One agent-agnostic file: start from a built-in, install one someone shared, or write and share your own. The best one listed today cuts total cost by 20.2% in its [author's benchmark](https://www.rtk-ai.app/pipelines/).
+Hand heavy reads to a cheaper model, compress more than bash, clean the API traffic without breaking the prompt cache. One agent-agnostic file: start from a built-in, install one someone shared, or write and share your own.
+The community built the bash compressor 85k developers starred. Now it is building pipelines: the best one listed today cuts total cost by 20.2% in its [author's benchmark](https://www.rtk-ai.app/pipelines/).
 
 **Running agents across a team?** [RTK Pro](https://pro.rtk-ai.app) is the control layer for every AI agent in your company: spend, secrets, policies, audit. [Take back control ↓](#running-agents-across-a-team-take-back-control)
+
+<br>
+
+---
+
+<br>
 
 ## Install & forget
 
@@ -66,6 +73,8 @@ Restart your agent. That's it: when it runs `git status`, RTK runs `rtk git stat
 > Another project named "rtk" exists on crates.io. Check you have this one: `rtk gain` must show the savings dashboard, not "command not found".
 >
 > Cargo, pre-built binaries, native Windows, WSL and uninstall: **[Installation guide](https://www.rtk-ai.app/docs/getting-started/installation/)** · per-agent setup and `--dry-run`: **[Quick Start](https://www.rtk-ai.app/docs/getting-started/quick-start/)**
+
+<br>
 
 ## Out of the box: the bash compressor
 
@@ -86,7 +95,7 @@ The part 85k developers starred. Built by 200+ contributors, written against rea
 
 100+ commands across Git, GitHub CLI, Cargo/Rust, JavaScript (npm, pnpm, vitest, jest, tsc, Next.js, Angular, Playwright, Prisma), Python (ruff, pytest, mypy, pip), Go (go test, golangci-lint), Ruby, .NET, JVM (Gradle, Maven), PHP, Docker, Kubernetes, AWS, Terraform, and the file/search builtins. Every command and its filter: **[What RTK Optimizes](https://www.rtk-ai.app/docs/resources/what-rtk-covers/)**
 
-Three promises:
+**Three promises**
 
 - **Never blocks.** If a filter fails, you get the raw output, and the command's exit code is passed through unchanged.
 - **Never worse.** RTK never prints more than the command did.
@@ -101,6 +110,8 @@ The hook rewrites shell commands. Built-in tools such as `Read`, `Grep` and `Glo
 
 > **Does RTK break the prompt cache?** No: output is filtered once, before it enters the conversation. [Details](docs/guide/resources/troubleshooting.md#does-rtk-break-claudes-prompt-cache).
 
+<br>
+
 ## Want to go further? Pipelines.
 
 Everything RTK does is written in one file, `pipeline.toml`: where RTK acts, when, and what it does. With no file you are on `rtk:default`, which is exactly the compressor above. Everything else is opt-in, one line at a time.
@@ -109,7 +120,7 @@ Everything RTK does is written in one file, `pipeline.toml`: where RTK acts, whe
   <img src=".github/assets/go-further.png" alt="Four things a pipeline turns on, one line each: less command output (on by default, up to 90% less); every tool compressed, not just the shell (Claude Code); big files read by a cheaper model you choose (Claude Code, your API key); clean API traffic through the optional proxy. Below: install a pipeline someone shared or share yours; the best one listed cuts total cost by 20.2% in its author's benchmark">
 </p>
 
-Built-in pipelines, each one line away:
+**Built-in pipelines, each one line away**
 
 | Pipeline | What it adds | Works in |
 |---|---|---|
@@ -129,7 +140,7 @@ extends = ["rtk:posthook", "rtk:proxy"]
 
 **Agent-agnostic.** You write `shell`, `read`, `before_tool`; RTK translates them to each agent's hooks. A pipeline written once works in every agent RTK supports, as far as that agent's hooks allow: **[Agent Coverage](https://www.rtk-ai.app/docs/resources/agent-coverage/)** shows exactly what runs where.
 
-**Share yours, or install one.**
+**Share yours, or install one**
 
 ```bash
 rtk pipeline share publish               # publish your pipeline: GitHub repo or gist
@@ -141,7 +152,7 @@ rtk gain                                 # what it saved on your own traffic
 
 > The tour: **[Pipelines](https://www.rtk-ai.app/docs/pipelines/overview/)** · the reference: **[Writing a Pipeline](https://www.rtk-ai.app/docs/pipelines/writing-pipelines/)**, **[Conditions and Judges](https://www.rtk-ai.app/docs/pipelines/conditions/)**, **[Methods](https://www.rtk-ai.app/docs/pipelines/methods/)**, **[Tasks and Upstreams](https://www.rtk-ai.app/docs/pipelines/tasks/)**, **[Reference Pipelines](https://www.rtk-ai.app/docs/pipelines/reference-pipelines/)** · the commands: **[Pipeline Commands](https://www.rtk-ai.app/docs/pipelines/commands/)** · your own methods: **[Plugins](https://www.rtk-ai.app/docs/pipelines/plugins/)**
 
-## RTK Proxy (optional)
+### RTK Proxy (optional)
 
 The `rtk-proxy` daemon runs the same pipeline on your agent's **provider-API traffic**: it strips bytes no model ever needed without breaking the prompt cache, and carries the calls your pipeline routes to cheaper models on the credential your agent already sends, so they show up in `rtk gain`. `rtk init -g` offers to set it up; `rtk claude` starts it and launches Claude through it with no configuration at all.
 
@@ -155,6 +166,12 @@ Separate binary, separate licence (BUSL-1.1), its own `rtk-proxy-<target>` archi
 
 > Setup and subcommands: **[RTK Proxy](https://www.rtk-ai.app/docs/proxy/overview/)** · what it compresses: **[What the Proxy Compresses](https://www.rtk-ai.app/docs/proxy/compression/)** · settings and endpoints: **[Proxy Configuration](https://www.rtk-ai.app/docs/proxy/configuration/)**
 
+<br>
+
+---
+
+<br>
+
 ## Running agents across a team? Take back control.
 
 <a href="https://pro.rtk-ai.app">
@@ -162,6 +179,12 @@ Separate binary, separate licence (BUSL-1.1), its own `rtk-proxy-<target>` archi
 </a>
 
 RTK runs on each developer's machine. **[RTK Pro](https://pro.rtk-ai.app)** connects them into one control layer: see what each team spends, keep secrets and risky commands from ever reaching a model, and prove who did what. The CLI stays free and open source.
+
+<br>
+
+---
+
+<br>
 
 ## Works in your agent
 
@@ -189,6 +212,8 @@ RTK supports 18 AI coding tools. With a **hook** or **plugin**, `rtk init` insta
 
 Per-agent setup, what each hook API allows, override controls: **[Supported Agents](https://www.rtk-ai.app/docs/getting-started/supported-agents/)** · **[Agent Coverage](https://www.rtk-ai.app/docs/resources/agent-coverage/)**
 
+<br>
+
 ## Measure it
 
 ```bash
@@ -207,6 +232,8 @@ rtk session                     # Show RTK adoption across recent sessions
 **What the numbers mean.** The compressor reduces the **command output** your agent reads, which is one part of the input tokens, which are one part of the bill: a 90% cut in command output is not a 90% cut in cost. Token counts are estimated as `bytes / 4`, so the percentages are reliable and the absolute numbers are approximate.
 
 > Full explanation: [How RTK Savings Work](docs/guide/resources/savings-explained.md) · attribution, the live dashboard and export formats: **[Token Savings Analytics](https://www.rtk-ai.app/docs/analytics/gain/)**
+
+<br>
 
 ## Documentation
 
@@ -231,9 +258,27 @@ Repository references: [engine/README.md](engine/README.md) · [proxy/README.md]
 
 RTK collects **no command content and no file contents**. Telemetry is anonymous and **off by default** — it sends nothing until you opt in with explicit consent (GDPR Art. 6 & 7) via `rtk telemetry enable`, and documented in [Telemetry & Privacy](https://www.rtk-ai.app/docs/resources/telemetry/).
 
+<br>
+
 ## Editions and licence
 
 RTK ships as three downloads. The two `rtk` editions install a binary with the **same name** — hooks, scripts and agent config work unchanged across both — so they cannot be installed together. Uninstall one before installing the other.
+
+| Download | Licence | Contains |
+|---|---|---|
+| `rtk-<target>` | Apache-2.0 + BUSL-1.1 | Hook core, every command filter, **and** the pipeline engine |
+| `rtk-oss-<target>` | Apache-2.0 only | Hook core and every command filter. No engine. |
+| `rtk-proxy-<target>` | BUSL-1.1 | The RTK Proxy daemon. Never bundled with either `rtk`. |
+
+**Production use is free**, engine and daemon included. What the BUSL grant does not cover is offering RTK or a derivative to third parties as a commercial product or service — for that, contact **contact@rtk-ai.app**.
+
+```bash
+curl -fsSL .../install.sh | RTK_EDITION=oss sh    # Apache-2.0 edition
+brew install rtk-ai/tap/rtk-oss
+```
+
+<details>
+<summary>Where the licence boundary falls</summary>
 
 ```mermaid
 flowchart TD
@@ -262,24 +307,19 @@ flowchart TD
     style editions fill:none,stroke:#d0d7de,stroke-dasharray:4 4
 ```
 
-| Download | Licence | Contains |
-|---|---|---|
-| `rtk-<target>` | Apache-2.0 + BUSL-1.1 | Hook core, every command filter, **and** the pipeline engine |
-| `rtk-oss-<target>` | Apache-2.0 only | Hook core and every command filter. No engine. |
-| `rtk-proxy-<target>` | BUSL-1.1 | The RTK Proxy daemon. Never bundled with either `rtk`. |
-
-**Production use is free**, engine and daemon included. What the BUSL grant does not cover is offering RTK or a derivative to third parties as a commercial product or service — for that, contact **contact@rtk-ai.app**.
-
-```bash
-curl -fsSL .../install.sh | RTK_EDITION=oss sh    # Apache-2.0 edition
-brew install rtk-ai/tap/rtk-oss
-```
-
 The `rtk` CLI is **Apache-2.0** — see [LICENSE](LICENSE). It links one component under a different licence: `rtk-engine` (`engine/`) is **BUSL-1.1**, source-available: see [engine/LICENSE](engine/LICENSE). Its Additional Use Grant permits production use as part of the `rtk` binary, so running `rtk` is covered; using the engine on its own, or inside another product, is not until the Change Date. The `rtk-proxy` daemon (`proxy/`) is **BUSL-1.1** on the same terms and ships as its own archive with its licence alongside — `rtk` never links it.
+
+</details>
 
 > What the Apache-2.0 edition omits and where the licence boundary falls: **[Editions and Licensing](https://www.rtk-ai.app/docs/resources/editions/)**
 
-## Star History
+<br>
+
+---
+
+<br>
+
+## Community
 
 <a href="https://www.star-history.com/?repos=rtk-ai%2Frtk&type=date&legend=top-left">
  <picture>
@@ -289,8 +329,6 @@ The `rtk` CLI is **Apache-2.0** — see [LICENSE](LICENSE). It links one compone
  </picture>
 </a>
 
-## StarMapper
-
 <a href="https://starmapper.bruniaux.com/rtk-ai/rtk">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://starmapper.bruniaux.com/api/map-image/rtk-ai/rtk?theme=dark" />
@@ -299,7 +337,7 @@ The `rtk` CLI is **Apache-2.0** — see [LICENSE](LICENSE). It links one compone
   </picture>
 </a>
 
-## Core team
+### Core team
 
 - **Patrick Szymkowiak** — Founder
   [GitHub](https://github.com/pszymkowiak) · [LinkedIn](https://www.linkedin.com/in/patrick-szymkowiak/)
@@ -312,12 +350,12 @@ The `rtk` CLI is **Apache-2.0** — see [LICENSE](LICENSE). It links one compone
 - **Takayuki Maeda** — Core contributor
   [GitHub](https://github.com/TaKO8Ki) · [LinkedIn](https://www.linkedin.com/in/tako8ki/)
 
-## Contributing
+### Contributing
 
 Contributions welcome: a new filter, a fix, or a pipeline you publish with `rtk pipeline share publish`. Open an issue or PR on [GitHub](https://github.com/rtk-ai/rtk) and read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
 Join the community on [Discord](https://discord.gg/RySmvNF5kF).
 
-## Disclaimer
+### Disclaimer
 
 See [DISCLAIMER.md](DISCLAIMER.md).
