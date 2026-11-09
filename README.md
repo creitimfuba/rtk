@@ -50,7 +50,7 @@ Test runs, diffs, logs and builds are compressed before your agent reads them. 1
 Hand heavy reads to a cheaper model, compress more than bash, clean the API traffic without breaking the prompt cache. One agent-agnostic file: start from a built-in, install one someone shared, or write and share your own.
 The community built the bash compressor 85k developers starred. Now it is building pipelines: the best one listed today cuts total cost by 20.2% in its [author's benchmark](https://www.rtk-ai.app/pipelines/).
 
-**Running agents across a team?** [RTK Pro](https://pro.rtk-ai.app) is the control layer for every AI agent in your company: spend, secrets, policies, audit. [Take back control ↓](#running-agents-across-a-team-take-back-control)
+**Agents across the whole company?** [RTK Pro](https://pro.rtk-ai.app) is the control layer for every AI agent: costs, secrets and personal data, policies, team catalog, audit. [Discover RTK Pro ↓](#agents-across-the-whole-company-know-what-they-cost-what-they-touch-and-who-ran-what)
 
 <br>
 
@@ -195,13 +195,13 @@ Separate binary, separate licence (BUSL-1.1), its own `rtk-proxy-<target>` archi
 
 <br>
 
-## Running agents across a team? Take back control.
+## Agents across the whole company? Know what they cost, what they touch, and who ran what.
 
 <a href="https://pro.rtk-ai.app">
-  <img src=".github/assets/rtk-pro.png" alt="RTK Pro: scale AI agents, stay in control. The control layer for every AI agent in your company. Observability: spend by team, person and model. Shield: secrets masked before the model sees them. Policies: risky commands stopped before they run. Audit: every action on record. Runs on each developer's machine, never a secret value leaves it, the CLI stays free and open source.">
+  <img src=".github/assets/rtk-pro.png" alt="RTK Pro: scale AI agents, stay in control. The control layer for every AI agent in your company. Cost control: spend by team, person and model, waste removed, budgets that warn, then stop. Shield: secrets and personal data masked before any model sees them. Policies: risky commands stopped before they run. Team catalog: skills, MCP servers and pipelines, assigned per team and project. Audit: who did what, and whether it was allowed, every action on record. Runs on each developer's machine, never a secret value leaves it, the CLI stays free and open source.">
 </a>
 
-RTK runs on each developer's machine. **[RTK Pro](https://pro.rtk-ai.app)** connects them into one control layer: see what each team spends, keep secrets and risky commands from ever reaching a model, and prove who did what. The CLI stays free and open source.
+RTK runs on each developer's machine. **[RTK Pro](https://pro.rtk-ai.app)** connects them into one control layer for the whole company: **cost control** (spend by team, person and model, waste found and removed, budgets that warn, then stop), a **Shield** that masks secrets and personal data before any model sees them, **policies** that stop risky commands before they run, a **team catalog** of skills, MCP servers and pipelines assigned per team and project, and an **audit log** of who did what and whether it was allowed. Nothing changes for the developer, no secret value ever leaves the machine, and the CLI stays free and open source.
 
 <br>
 
